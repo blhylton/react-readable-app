@@ -1,0 +1,1 @@
+export const fetchCategories = () => fetch('http://localhost:3001/categories', { headers: { 'Authorization': 'Hello World' } })
