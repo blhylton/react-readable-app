@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchCategories } from './actions'
+import { push } from 'react-router-redux'
 
 class CategoryList extends Component {
   componentDidMount = () => { this.props.getCategories() }
@@ -11,13 +12,14 @@ class CategoryList extends Component {
     }
 
     return (
-      <ul className="category-list">
+      <div className="category-list">
+        <a href="" onClick={() => this.props.push('/')}>All</a>
         {categories.map((category) => (
-          <li key={category.name}>
+          <a href="" onClick={() => this.props.push(`/category/${category.name}`)} key={category.name}>
             {category.name}
-          </li>
+          </a>
         ))}
-      </ul>
+      </div>
     )
   }
 }
@@ -26,7 +28,8 @@ class CategoryList extends Component {
 const mapStateToProps = (state) => (state.categories)
 
 const mapDispatchToProps = (dispatch) => ({
-  getCategories: (data) => dispatch(fetchCategories(data))
+  getCategories: (data) => dispatch(fetchCategories(data)),
+  push: (url) => dispatch(push(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)

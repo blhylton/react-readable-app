@@ -22,6 +22,7 @@ class PostList extends Component {
 
   componentDidMount = () => {
     if (this.props.category) {
+      console.log(this.props.category)
       this.props.getCategoryPosts(this.props.category)
     } else {
       this.props.getPosts()
@@ -70,11 +71,15 @@ class PostList extends Component {
 }
 
 
-const mapStateToProps = (state) => (state.posts)
+const mapStateToProps = (state, props) => ({
+  posts: state.posts.posts,
+  category: props.category
+}
+)
 
 const mapDispatchToProps = (dispatch) => ({
   getPosts: () => dispatch(fetchAllPosts()),
-  getCategoryPosts: (data) => dispatch(fetchCategoryPosts('react')),
+  getCategoryPosts: (category) => dispatch(fetchCategoryPosts(category)),
   sortScoreAsc: () => dispatch(sortPostsScoreAsc()),
   sortScoreDesc: () => dispatch(sortPostsScoreDesc()),
   sortTimestampAsc: () => dispatch(sortPostsTimestampAsc()),
