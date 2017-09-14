@@ -16,13 +16,8 @@ class PostList extends Component {
     category: PropTypes.string
   }
 
-  static defaultProps = {
-    sort: 'scoreAsc'
-  }
-
   componentDidMount = () => {
     if (this.props.category) {
-      console.log(this.props.category)
       this.props.getCategoryPosts(this.props.category)
     } else {
       this.props.getPosts()
@@ -74,6 +69,7 @@ class PostList extends Component {
 const mapStateToProps = (state, props) => ({
   posts: state.posts.posts,
   loading: state.posts.loading,
+  sort: state.posts.sort,
   category: props.category
 }
 )
