@@ -7,9 +7,6 @@ class CategoryList extends Component {
   componentDidMount = () => { this.props.getCategories() }
   render() {
     const categories = this.props.categories
-    if (categories.length === 0) {
-      return <p>There are no categories available :(</p>
-    }
 
     return (
       <div className="category-list">
@@ -28,7 +25,7 @@ class CategoryList extends Component {
 const mapStateToProps = (state) => (state.categories)
 
 const mapDispatchToProps = (dispatch) => ({
-  getCategories: (data) => dispatch(fetchCategories(data)),
+  getCategories: () => dispatch(fetchCategories()),
   push: (url) => dispatch(push(url))
 })
 

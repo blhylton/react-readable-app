@@ -11,7 +11,8 @@ import {
 const initialPostsState = {
   posts: [],
   detailedPost: {},
-  sort: 'scoreAsc'
+  sort: 'scoreAsc',
+  loading: true
 }
 
 export default function posts(state = initialPostsState, action) {
@@ -20,12 +21,14 @@ export default function posts(state = initialPostsState, action) {
     case GET_CATEGORY_POSTS:
       return {
         ...state,
-        posts: action.posts
+        posts: action.posts,
+        loading: false
       }
     case GET_SINGLE_POST:
       return {
         ...state,
-        detailedPost: action.post
+        detailedPost: action.post,
+        loading: false
       }
     case SORT_POSTS_SCORE_ASC:
     case SORT_POSTS_SCORE_DESC:

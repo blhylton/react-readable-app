@@ -30,8 +30,8 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts, sort, sortScoreAsc, sortScoreDesc, sortTimestampAsc, sortTimestampDesc } = this.props
-    if (posts.length === 0) {
+    const { posts, sort, sortScoreAsc, sortScoreDesc, sortTimestampAsc, sortTimestampDesc, loading } = this.props
+    if (posts.length === 0 && loading === false) {
       return <p>There are no posts available :(</p>
     }
 
@@ -73,6 +73,7 @@ class PostList extends Component {
 
 const mapStateToProps = (state, props) => ({
   posts: state.posts.posts,
+  loading: state.posts.loading,
   category: props.category
 }
 )

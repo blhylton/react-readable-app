@@ -1,7 +1,8 @@
 import { GET_CATEGORIES } from './actions'
 
 const initialCategoriesState = {
-  categories: []
+  categories: [],
+  loading: true
 }
 export default function categories(state = initialCategoriesState, action) {
   switch (action.type) {
@@ -9,6 +10,7 @@ export default function categories(state = initialCategoriesState, action) {
       return {
         ...state,
         categories: action.categories,
+        loading: false
       }
     default:
       return state
