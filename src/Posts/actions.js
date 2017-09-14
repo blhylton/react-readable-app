@@ -1,4 +1,5 @@
 import * as PostAPIUtil from './utils'
+import uuid from 'uuid/v1'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_CATEGORY_POSTS = 'GET_CATEGORY_POSTS'
@@ -67,6 +68,18 @@ export const postVotePost = (id, type) => dispatch => (
     .votePost(id, type)
     .then((res) => res.json())
     .then(json => dispatch(votePost(id, json.voteScore)))
+)
+
+export const createPost = (post) => ({
+  type: CREATE_POST,
+  post
+})
+
+export const postCreatePost = (title, body, author, category) => dispatch => (
+  PostAPIUtil
+    .createPost({ title, body, author, category, timestamp: + new Date(), id: uuid() })
+    .then(res => res.json())
+    .then(json => dispatch(createPost(json)))
 )
 
 export const sortPostsScoreAsc = () => (

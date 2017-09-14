@@ -8,6 +8,7 @@ import Loading from 'react-loading'
 import CategoryList from './Categories/categoryList.component'
 import PostList from './Posts/postList.component'
 import SinglePost from './Posts/postSingle.component'
+import PostForm from './Posts/postForm.component'
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route path="/post/:id" render={(params) => (
           <SinglePost id={params.match.params.id} />
         )} />
+        <Route path="/create-post" component={PostForm} />
       </div>
     );
   }

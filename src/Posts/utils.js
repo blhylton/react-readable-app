@@ -6,7 +6,7 @@ export const fetchCategoryPosts = (category) => fetch(`http://localhost:3001/${c
 
 export const fetchSinglePost = (id) => fetch(`http://localhost:3001/posts/${id}`, headers)
 
-export const createPost = (post) => fetch('http://localhost:3001/posts', { ...headers, method: 'POST', body: post })
+export const createPost = (post) => fetch('http://localhost:3001/posts', { ...headers, method: 'POST', body: JSON.stringify(post) })
 
 export const votePost = (id, voteType) => (fetch(`http://localhost:3001/posts/${id}`, { ...headers, method: 'POST', body: JSON.stringify({ option: voteType }) }))
 
