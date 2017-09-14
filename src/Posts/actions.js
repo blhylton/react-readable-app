@@ -54,6 +54,21 @@ export const fetchSinglePost = (id) => dispatch => (
     .then(json => dispatch(getPost(json)))
 )
 
+export const votePost = (id, score) => (
+  {
+    type: VOTE_POST,
+    id,
+    score
+  }
+)
+
+export const postVotePost = (id, type) => dispatch => (
+  PostAPIUtil
+    .votePost(id, type)
+    .then((res) => res.json())
+    .then(json => dispatch(votePost(id, json.voteScore)))
+)
+
 export const sortPostsScoreAsc = () => (
   {
     type: SORT_POSTS_SCORE_ASC,

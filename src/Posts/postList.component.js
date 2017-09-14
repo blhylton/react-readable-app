@@ -4,6 +4,7 @@ import sortBy from 'sort-by'
 import {
   fetchAllPosts,
   fetchCategoryPosts,
+  postVotePost,
   sortPostsScoreAsc,
   sortPostsScoreDesc,
   sortPostsTimestampAsc,
@@ -57,6 +58,8 @@ class PostList extends Component {
         <ul className="post-list">
           {posts.map((post) => (
             <li key={post.id}>
+              <button onClick={() => { this.props.upvotePost(post.id) }}>Upvote</button>
+              <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
               <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
             </li>
           ))}
@@ -82,7 +85,9 @@ const mapDispatchToProps = (dispatch) => ({
   sortScoreDesc: () => dispatch(sortPostsScoreDesc()),
   sortTimestampAsc: () => dispatch(sortPostsTimestampAsc()),
   sortTimestampDesc: () => dispatch(sortPostsTimestampDesc()),
-  push: (url) => dispatch(push(url))
+  push: (url) => dispatch(push(url)),
+  upvotePost: (id) => dispatch(postVotePost(id, 'upVote')),
+  downvotePost: (id) => dispatch(postVotePost(id, 'downVote'))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)

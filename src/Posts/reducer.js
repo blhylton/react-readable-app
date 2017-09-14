@@ -2,6 +2,7 @@ import {
   GET_ALL_POSTS,
   GET_CATEGORY_POSTS,
   GET_SINGLE_POST,
+  VOTE_POST,
   SORT_POSTS_SCORE_ASC,
   SORT_POSTS_SCORE_DESC,
   SORT_POSTS_TIMESTAMP_ASC,
@@ -29,6 +30,18 @@ export default function posts(state = initialPostsState, action) {
         ...state,
         detailedPost: action.post,
         loading: false
+      }
+    case VOTE_POST:
+      return {
+        ...state,
+        posts: state.posts.map((obj) => {
+          if (obj.id === action.id) {
+            console.log(action.score)
+            obj.voteScore = action.score
+          }
+
+          return obj
+        })
       }
     case SORT_POSTS_SCORE_ASC:
     case SORT_POSTS_SCORE_DESC:
