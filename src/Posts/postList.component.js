@@ -10,6 +10,7 @@ import {
   sortPostsTimestampDesc
 } from './actions'
 import PropTypes from 'prop-types'
+import { push } from 'react-router-redux'
 
 class PostList extends Component {
   static propTypes = {
@@ -56,7 +57,7 @@ class PostList extends Component {
         <ul className="post-list">
           {posts.map((post) => (
             <li key={post.id}>
-              {post.title}
+              <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
             </li>
           ))}
         </ul>
@@ -80,7 +81,8 @@ const mapDispatchToProps = (dispatch) => ({
   sortScoreAsc: () => dispatch(sortPostsScoreAsc()),
   sortScoreDesc: () => dispatch(sortPostsScoreDesc()),
   sortTimestampAsc: () => dispatch(sortPostsTimestampAsc()),
-  sortTimestampDesc: () => dispatch(sortPostsTimestampDesc())
+  sortTimestampDesc: () => dispatch(sortPostsTimestampDesc()),
+  push: (url) => dispatch(push(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)

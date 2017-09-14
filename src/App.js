@@ -7,6 +7,7 @@ import Loading from 'react-loading'
 
 import CategoryList from './Categories/categoryList.component'
 import PostList from './Posts/postList.component'
+import SinglePost from './Posts/postSingle.component'
 
 class App extends Component {
   render() {
@@ -18,6 +19,9 @@ class App extends Component {
         <Route path="/" exact component={PostList} />
         <Route path="/category/:category" render={(category) => (
           <PostList category={category.match.params.category} />
+        )} />
+        <Route path="/post/:id" render={(params) => (
+          <SinglePost id={params.match.params.id} />
         )} />
       </div>
     );
