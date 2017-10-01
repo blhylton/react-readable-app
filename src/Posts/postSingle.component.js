@@ -35,7 +35,7 @@ class SinglePost extends Component {
             <p>Author: {post.author}</p>
             <a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a>
             <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a>
-            <CommentList id={post.id} />
+            <CommentList id={id} />
           </div>
         )}
       </div>
