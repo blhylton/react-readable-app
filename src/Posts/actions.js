@@ -12,6 +12,7 @@ export const SORT_POSTS_SCORE_ASC = 'SORT_POSTS_SCORE_ASC'
 export const SORT_POSTS_SCORE_DESC = 'SORT_POSTS_SCORE_DESC'
 export const SORT_POSTS_TIMESTAMP_ASC = 'SORT_POSTS_TIMESTAMP_ASC'
 export const SORT_POSTS_TIMESTAMP_DESC = 'SORT_POSTS_TIMESTAMP_DESC'
+export const STOP_LOADER = 'STOP_LOADER'
 
 export const getAllPosts = (posts) => (
   {
@@ -82,6 +83,18 @@ export const postCreatePost = (title, body, author, category) => dispatch => (
     .then(json => dispatch(createPost(json)))
 )
 
+export const updatePost = (post) => ({
+  type: UPDATE_POST,
+  post
+})
+
+export const postUpdatePost = (post) => dispatch => (
+  PostAPIUtil
+    .createPost(post)
+    .then(res => res.json())
+    .then(json => dispatch(createPost(json)))
+)
+
 export const sortPostsScoreAsc = () => (
   {
     type: SORT_POSTS_SCORE_ASC,
@@ -107,5 +120,11 @@ export const sortPostsTimestampDesc = () => (
   {
     type: SORT_POSTS_TIMESTAMP_DESC,
     sort: 'timestampDesc'
+  }
+)
+
+export const stopLoaderAnimation = () => (
+  {
+    type: STOP_LOADER
   }
 )

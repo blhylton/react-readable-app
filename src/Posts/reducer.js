@@ -7,7 +7,8 @@ import {
   SORT_POSTS_SCORE_ASC,
   SORT_POSTS_SCORE_DESC,
   SORT_POSTS_TIMESTAMP_ASC,
-  SORT_POSTS_TIMESTAMP_DESC
+  SORT_POSTS_TIMESTAMP_DESC,
+  STOP_LOADER
 } from './actions'
 
 const initialPostsState = {
@@ -55,6 +56,11 @@ export default function posts(state = initialPostsState, action) {
       return {
         ...state,
         sort: action.sort
+      }
+    case STOP_LOADER:
+      return {
+        ...state,
+        loading: false
       }
     default:
       return state
