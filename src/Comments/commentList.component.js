@@ -6,7 +6,6 @@ import {
 
 class CommentList extends Component {
   componentDidMount = () => {
-    console.log(this.props)
     this.props.getComments(this.props.id)
   }
 
