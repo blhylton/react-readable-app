@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     const { categoriesLoading, postsLoading } = this.props
     return (
-      <div className="App" location={this.props.location}>
+      <div className="App" data-loc={this.props.location}>
         {(categoriesLoading === true || postsLoading === true) && <Loading delay={200} type="cylon" color="#222" className="loading" />}
         <CategoryList />
         <Route path="/" exact component={PostList} />
