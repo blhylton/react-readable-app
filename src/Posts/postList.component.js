@@ -51,19 +51,39 @@ class PostList extends Component {
 
     return (
       <div className="post-list-container">
-        <button onClick={sortScoreAsc}>Score Ascending</button>
-        <button onClick={sortScoreDesc}>Score Descending</button>
-        <button onClick={sortTimestampAsc}>Time Ascending</button>
-        <button onClick={sortTimestampDesc}>Time Descending</button>
-        <ul className="post-list">
-          {posts.map((post) => (
-            <li key={post.id}>
-              <button onClick={() => { this.props.upvotePost(post.id) }}>Upvote</button>
-              <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
-              <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
-            </li>
-          ))}
-        </ul>
+        <div className="sortControls">
+          <button onClick={sortScoreAsc}>Score Ascending</button>
+          <button onClick={sortScoreDesc}>Score Descending</button>
+          <button onClick={sortTimestampAsc}>Newest First</button>
+          <button onClick={sortTimestampDesc}>Oldest First</button>
+        </div>
+        <a href="" onClick={() => { this.props.push('/create-post') }}>New Post</a>
+        <table className="post-list">
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Controls</th>
+              <th>Title</th>
+              <th>TimeStamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr key={post.id}>
+                <td>{post.voteScore}</td>
+                <td>
+                  <button onClick={() => { this.props.upvotePost(post.id) }}>Upvote</button>
+                  <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
+                </td>
+                <td>
+                  <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
+                </td>
+                <td>{(new Date(post.timestamp)).toString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
       </div>
     )
   }
