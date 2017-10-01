@@ -90,9 +90,21 @@ export const updatePost = (post) => ({
 
 export const postUpdatePost = (post) => dispatch => (
   PostAPIUtil
-    .createPost(post)
+    .updatePost(post)
     .then(res => res.json())
-    .then(json => dispatch(createPost(json)))
+    .then(json => dispatch(updatePost(json)))
+)
+
+export const deletePost = (post) => ({
+  type: DELETE_POST,
+  post
+})
+
+export const postDeletePost = (id) => dispatch => (
+  PostAPIUtil
+    .deletePost(id)
+    .then(res => res.json())
+    .then(json => { console.log(json); return dispatch(deletePost(json)) })
 )
 
 export const sortPostsScoreAsc = () => (

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  fetchSinglePost
+  fetchSinglePost,
+  postDeletePost
 } from './actions'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
@@ -31,6 +32,8 @@ class SinglePost extends Component {
             <p>Timestamp: {(new Date(post.timestamp)).toString()}</p>
             <p>{post.body}</p>
             <p>Author: {post.author}</p>
+            <a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a>
+            <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a>
           </div>
         )}
       </div>
@@ -46,6 +49,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => ({
   getPost: (id) => dispatch(fetchSinglePost(id)),
+  push: (url) => dispatch(push(url)),
+  delete: (id) => dispatch(postDeletePost(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)

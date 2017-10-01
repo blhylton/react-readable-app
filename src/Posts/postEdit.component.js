@@ -4,12 +4,14 @@ import {
   postUpdatePost,
   fetchSinglePost
 } from './actions'
+import { push } from 'react-router-redux'
 
 import PostForm from './postForm.component'
 
 class PostCreate extends Component {
   submit = (values) => {
     this.props.updatePost(values)
+    this.props.push(`/post/${this.props.post.id}`)
   }
 
   componentDidMount = () => {
@@ -30,6 +32,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
   updatePost: (post) => dispatch(postUpdatePost(post)),
   getPost: (id) => dispatch(fetchSinglePost(id)),
+  push: (url) => dispatch(push(url))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCreate)

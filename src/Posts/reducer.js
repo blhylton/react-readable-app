@@ -4,6 +4,8 @@ import {
   GET_SINGLE_POST,
   VOTE_POST,
   CREATE_POST,
+  UPDATE_POST,
+  DELETE_POST,
   SORT_POSTS_SCORE_ASC,
   SORT_POSTS_SCORE_DESC,
   SORT_POSTS_TIMESTAMP_ASC,
@@ -48,6 +50,19 @@ export default function posts(state = initialPostsState, action) {
       return {
         ...state,
         detailedPost: action.post
+      }
+    case UPDATE_POST:
+      return {
+        ...state,
+        detailedPost: action.post,
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: [
+          ...state[posts],
+          action.post
+        ]
       }
     case SORT_POSTS_SCORE_ASC:
     case SORT_POSTS_SCORE_DESC:

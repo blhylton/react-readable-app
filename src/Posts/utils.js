@@ -10,6 +10,6 @@ export const createPost = (post) => fetch('http://localhost:3001/posts', { ...he
 
 export const votePost = (id, voteType) => (fetch(`http://localhost:3001/posts/${id}`, { ...headers, method: 'POST', body: JSON.stringify({ option: voteType }) }))
 
-export const updatePost = (post) => fetch(`https://localhost:3001/posts/${post.id}`, { ...headers, method: 'PUT', body: { title: post.title, body: post.body } })
+export const updatePost = (post) => fetch(`http://localhost:3001/posts/${post.id}`, { ...headers, method: 'PUT', body: JSON.stringify(post) })
 
 export const deletePost = (id) => fetch(`http://localhost:3001/posts/${id}`, { ...headers, method: 'DELETE' })

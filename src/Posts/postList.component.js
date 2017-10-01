@@ -68,19 +68,22 @@ class PostList extends Component {
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
-              <tr key={post.id}>
-                <td>{post.voteScore}</td>
-                <td>
-                  <button onClick={() => { this.props.upvotePost(post.id) }}>Upvote</button>
-                  <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
-                </td>
-                <td>
-                  <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
-                </td>
-                <td>{(new Date(post.timestamp)).toString()}</td>
-              </tr>
-            ))}
+            {posts.map((post) => {
+              return !post.deleted && (
+                <tr key={post.id}>
+                  <td>{post.voteScore}</td>
+                  <td>
+                    <button onClick={() => { this.props.upvotePost(post.id) }}>Upvote</button>
+                    <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
+                  </td>
+                  <td>
+                    <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
+                  </td>
+                  <td>{(new Date(post.timestamp)).toString()}</td>
+                </tr>
+              )
+            }
+            )}
           </tbody>
         </table>
 

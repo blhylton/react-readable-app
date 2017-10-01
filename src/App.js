@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     const { categoriesLoading, postsLoading } = this.props
     return (
-      <div className="App">
+      <div className="App" location={this.props.location}>
         {(categoriesLoading === true || postsLoading === true) && <Loading delay={200} type="cylon" color="#222" className="loading" />}
         <CategoryList />
         <Route path="/" exact component={PostList} />
@@ -29,14 +29,15 @@ class App extends Component {
         <Route path="/edit-post/:id" render={(params) => (
           <PostEdit id={params.match.params.id} />
         )} />
-      </div>
+      </div >
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   categoriesLoading: state.categories.loading,
-  postsLoading: state.posts.loading
+  postsLoading: state.posts.loading,
+  location: state.router.location
 })
 
 export default connect(mapStateToProps)(App);
