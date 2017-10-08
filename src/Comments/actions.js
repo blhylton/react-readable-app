@@ -22,6 +22,20 @@ export const fetchComments = (postId) => dispatch => (
     .then(json => dispatch(getComments(json)))
 )
 
+export const getComment = comment => (
+  {
+    type: GET_COMMENT,
+    comment
+  }
+)
+
+export const fetchComment = commentId => dispatch => (
+  CommentAPIUtil
+    .fetchCommentDetails(commentId)
+    .then(res => res.json())
+    .then(json => dispatch(getComment(json)))
+)
+
 export const createComment = (comment) => (
   {
     type: CREATE_COMMENT,
@@ -48,4 +62,18 @@ export const postVoteComment = (id, voteType) => dispatch => (
     .voteComment(id, voteType)
     .then(res => res.json())
     .then(json => dispatch(voteComment(json)))
+)
+
+export const editComment = (comment) => (
+  {
+    type: UPDATE_COMMENT,
+    comment
+  }
+)
+
+export const updateComment = (comment) => dispatch => (
+  CommentAPIUtil
+    .editComment(comment)
+    .then(res => res.json())
+    .then(json => dispatch(editComment(json)))
 )

@@ -8,6 +8,6 @@ export const createComment = (comment) => fetch('http://localhost:3001/comments'
 
 export const voteComment = (id, voteType) => fetch(`http://localhost:3001/comments/${id}`, { ...headers, method: 'POST', body: JSON.stringify({ option: voteType }) })
 
-export const editComment = (comment) => fetch(`http://localhost:3001/comments/${comment.id}`, { ...headers, method: 'PUT', body: comment.body, timestamp: + new Date() })
+export const editComment = (comment) => fetch(`http://localhost:3001/comments/${comment.id}`, { ...headers, method: 'PUT', body: JSON.stringify(comment), timestamp: + new Date() })
 
 export const deleteComment = (id) => fetch(`http://localhost:3001/comments/${id}`, { ...headers, method: 'DELETE' })

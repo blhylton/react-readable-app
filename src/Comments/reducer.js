@@ -9,7 +9,7 @@ import {
 
 const initialCommentsState = {
   comments: [],
-  detailedComments: {},
+  detailedComment: {},
   loading: true
 }
 
@@ -20,6 +20,11 @@ export default function comments(state = initialCommentsState, action) {
         ...state,
         comments: action.comments,
         loading: false
+      }
+    case GET_COMMENT:
+      return {
+        ...state,
+        detailedComment: action.comment
       }
     case CREATE_COMMENT:
       return {
@@ -36,6 +41,15 @@ export default function comments(state = initialCommentsState, action) {
           ...state.comments.filter(c => c.id !== action.comment.id),
           action.comment
         ]
+      }
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter(c => c.id !== action.comment.id),
+          action.comment
+        ],
+        detailedComment: action.comment
       }
     default:
       return state

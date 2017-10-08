@@ -6,6 +6,7 @@ import {
 } from './actions'
 import CommentCreate from './commentCreate.component'
 import sortBy from 'sort-by'
+import { push } from 'react-router-redux'
 
 class CommentList extends Component {
   componentDidMount = () => {
@@ -44,7 +45,7 @@ class CommentList extends Component {
                 <td>{comment.body}</td>
                 <td>{(new Date(comment.timestamp)).toString()}</td>
                 <td>
-                  <a href="">Edit</a>
+                  <a href="" onClick={() => { this.props.push(`/edit-comment/${comment.id}`) }}>Edit</a>
                   <a href="">Delete</a>
                 </td>
               </tr>
@@ -65,7 +66,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getComments: (id) => dispatch(fetchComments(id)),
-  voteComment: (id, voteType) => dispatch(postVoteComment(id, voteType))
+  voteComment: (id, voteType) => dispatch(postVoteComment(id, voteType)),
+  push: (url) => dispatch(push(url)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList)

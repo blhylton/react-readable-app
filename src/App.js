@@ -10,6 +10,7 @@ import PostList from './Posts/postList.component'
 import SinglePost from './Posts/postSingle.component'
 import PostCreate from './Posts/postCreate.component'
 import PostEdit from './Posts/postEdit.component'
+import CommentEdit from './Comments/commentEdit.component'
 
 class App extends Component {
   render() {
@@ -28,6 +29,9 @@ class App extends Component {
         <Route path="/create-post" component={PostCreate} />
         <Route path="/edit-post/:id" render={(params) => (
           <PostEdit id={params.match.params.id} />
+        )} />
+        <Route path="/edit-comment/:id" render={(params) => (
+          <CommentEdit id={params.match.params.id} />
         )} />
       </div >
     );
