@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   fetchComments,
-  postVoteComment
+  postVoteComment,
+  fetchDeleteComment
 } from './actions'
 import CommentCreate from './commentCreate.component'
 import sortBy from 'sort-by'
@@ -14,7 +15,7 @@ class CommentList extends Component {
   }
 
   render() {
-    const { loading, comments, voteComment } = this.props;
+    const { loading, comments, voteComment, deleteComment } = this.props;
     if (comments.length === 0 && loading === false) {
       return <p>There are no comments</p>
     }
@@ -46,7 +47,7 @@ class CommentList extends Component {
                 <td>{(new Date(comment.timestamp)).toString()}</td>
                 <td>
                   <a href="" onClick={() => { this.props.push(`/edit-comment/${comment.id}`) }}>Edit</a>
-                  <a href="">Delete</a>
+                  <a href="" onClick={() => { deleteComment(comment.id) }}>Delete</a>
                 </td>
               </tr>
             ))}
@@ -67,6 +68,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch) => ({
   getComments: (id) => dispatch(fetchComments(id)),
   voteComment: (id, voteType) => dispatch(postVoteComment(id, voteType)),
+  deleteComment: id => dispatch(fetchDeleteComment(id)),
   push: (url) => dispatch(push(url)),
 })
 

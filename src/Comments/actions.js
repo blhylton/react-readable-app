@@ -77,3 +77,17 @@ export const updateComment = (comment) => dispatch => (
     .then(res => res.json())
     .then(json => dispatch(editComment(json)))
 )
+
+export const deleteComment = comment => (
+  {
+    type: DELETE_COMMENT,
+    comment
+  }
+)
+
+export const fetchDeleteComment = id => dispatch => (
+  CommentAPIUtil
+    .deleteComment(id)
+    .then(res => res.json())
+    .then(json => dispatch(deleteComment(json)))
+)

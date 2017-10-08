@@ -51,6 +51,13 @@ export default function comments(state = initialCommentsState, action) {
         ],
         detailedComment: action.comment
       }
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter(c => c.id !== action.comment.id),
+        ]
+      }
     default:
       return state
   }
