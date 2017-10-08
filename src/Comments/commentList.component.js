@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  fetchComments
+  fetchComments,
+  postVoteComment
 } from './actions'
+import CommentCreate from './commentCreate.component'
+import sortBy from 'sort-by'
 
 class CommentList extends Component {
   componentDidMount = () => {
@@ -10,36 +13,46 @@ class CommentList extends Component {
   }
 
   render() {
-    const { loading, comments } = this.props;
+    const { loading, comments, voteComment } = this.props;
     if (comments.length === 0 && loading === false) {
       return <p>There are no comments</p>
     }
+
+    comments.sort(sortBy('-voteScore'))
     return (
-      <table className="commentList">
-        <thead>
-          <tr>
-            <th>Score</th>
-            <th>Controls</th>
-            <th>Author</th>
-            <th>Content</th>
-            <th>TimeStamp</th>
-          </tr>
-        </thead>
-        <tbody>
-          {comments.map((comment) => (
-            <tr key={comment.id}>
-              <td>{comment.voteScore}</td>
-              <td>
-                <button>Upvote</button>
-                <button>Downvote</button>
-              </td>
-              <td>{comment.author}</td>
-              <td>{comment.body}</td>
-              <td>{(new Date(comment.timestamp)).toString()}</td>
+      <div>
+        <table className="commentList">
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Controls</th>
+              <th>Author</th>
+              <th>Content</th>
+              <th>TimeStamp</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {comments.map((comment) => (
+              <tr key={comment.id}>
+                <td>{comment.voteScore}</td>
+                <td>
+                  <button onClick={() => voteComment(comment.id, 'upVote')}>Upvote</button>
+                  <button onClick={() => voteComment(comment.id, 'downVote')}>Downvote</button>
+                </td>
+                <td>{comment.author}</td>
+                <td>{comment.body}</td>
+                <td>{(new Date(comment.timestamp)).toString()}</td>
+                <td>
+                  <a href="">Edit</a>
+                  <a href="">Delete</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <CommentCreate id={this.props.id} />
+      </div>
     )
   }
 }
@@ -51,7 +64,8 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getComments: (id) => dispatch(fetchComments(id))
+  getComments: (id) => dispatch(fetchComments(id)),
+  voteComment: (id, voteType) => dispatch(postVoteComment(id, voteType))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList)

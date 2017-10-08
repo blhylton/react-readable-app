@@ -21,6 +21,22 @@ export default function comments(state = initialCommentsState, action) {
         comments: action.comments,
         loading: false
       }
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        comments: [
+          ...state.comments,
+          action.comment
+        ]
+      }
+    case VOTE_COMMENT:
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter(c => c.id !== action.comment.id),
+          action.comment
+        ]
+      }
     default:
       return state
   }
