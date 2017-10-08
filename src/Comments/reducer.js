@@ -9,8 +9,7 @@ import {
 
 const initialCommentsState = {
   comments: [],
-  detailedComment: {},
-  loading: true
+  detailedComment: {}
 }
 
 export default function comments(state = initialCommentsState, action) {
@@ -19,7 +18,6 @@ export default function comments(state = initialCommentsState, action) {
       return {
         ...state,
         comments: action.comments,
-        loading: false
       }
     case GET_COMMENT:
       return {

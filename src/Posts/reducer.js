@@ -16,8 +16,7 @@ import {
 const initialPostsState = {
   posts: [],
   detailedPost: {},
-  sort: 'scoreAsc',
-  loading: true
+  sort: 'scoreAsc'
 }
 
 export default function posts(state = initialPostsState, action) {
@@ -26,14 +25,12 @@ export default function posts(state = initialPostsState, action) {
     case GET_CATEGORY_POSTS:
       return {
         ...state,
-        posts: action.posts,
-        loading: false
+        posts: action.posts
       }
     case GET_SINGLE_POST:
       return {
         ...state,
-        detailedPost: action.post,
-        loading: false
+        detailedPost: action.post
       }
     case VOTE_POST:
       return {

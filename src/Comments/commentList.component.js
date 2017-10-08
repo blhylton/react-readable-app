@@ -46,8 +46,7 @@ class CommentList extends Component {
                 <td>{comment.body}</td>
                 <td>{(new Date(comment.timestamp)).toString()}</td>
                 <td>
-                  <a href="" onClick={() => { this.props.push(`/edit-comment/${comment.id}`) }}>Edit</a>
-                  <a href="" onClick={() => { deleteComment(comment.id) }}>Delete</a>
+                  <a href="" onClick={() => { this.props.push(`/edit-comment/${comment.id}`) }}>Edit</a> | <a href="" onClick={() => { deleteComment(comment.id) }}>Delete</a>
                 </td>
               </tr>
             ))}

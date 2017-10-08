@@ -7,14 +7,13 @@ class CategoryList extends Component {
   componentDidMount = () => { this.props.getCategories() }
   render() {
     const categories = this.props.categories
-
     return (
       <div className="category-list">
         <a href="" onClick={() => this.props.push('/')}>All</a>
         {categories.map((category) => (
-          <a href="" onClick={() => this.props.push(`/category/${category.name}`)} key={category.name}>
-            {category.name}
-          </a>
+          <span key={category.name}> | <a href="" onClick={() => this.props.push(`/category/${category.name}`)}>
+            {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+          </a></span>
         ))}
       </div>
     )

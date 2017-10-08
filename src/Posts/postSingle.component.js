@@ -33,8 +33,7 @@ class SinglePost extends Component {
             <p>Timestamp: {(new Date(post.timestamp)).toString()}</p>
             <p>{post.body}</p>
             <p>Author: {post.author}</p>
-            <a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a>
-            <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a>
+            <a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a>
             <CommentList id={id} />
           </div>
         )}
