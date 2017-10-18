@@ -18,15 +18,16 @@ class SinglePost extends Component {
   }
 
   render() {
-    const { post, loading, id } = this.props
+    const { post, id } = this.props
 
-    if (post === undefined && loading === false) {
+    if (post.title === undefined) {
       return <p>No post with id {id}</p>
     }
 
+
     return (
       <div className="post">
-        {post && (
+        {post.title && (
           <div>
             <h1>{post.title}</h1>
             <p>Current Score: {post.voteScore}</p>
@@ -44,7 +45,6 @@ class SinglePost extends Component {
 
 const mapStateToProps = (state, props) => ({
   post: state.posts.detailedPost,
-  loading: state.posts.loading,
   id: props.id
 })
 
