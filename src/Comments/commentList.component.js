@@ -15,8 +15,8 @@ class CommentList extends Component {
   }
 
   render() {
-    const { loading, comments, voteComment, deleteComment } = this.props;
-    if (comments.length === 0 && loading === false) {
+    const { comments, voteComment, deleteComment } = this.props;
+    if (comments.length === 0) {
       return <p>There are no comments</p>
     }
 
@@ -60,7 +60,6 @@ class CommentList extends Component {
 
 const mapStateToProps = (state, props) => ({
   comments: state.comments.comments,
-  loading: state.comments.loading,
   id: props.id
 })
 
