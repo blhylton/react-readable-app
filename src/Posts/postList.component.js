@@ -8,7 +8,8 @@ import {
   sortPostsScoreAsc,
   sortPostsScoreDesc,
   sortPostsTimestampAsc,
-  sortPostsTimestampDesc
+  sortPostsTimestampDesc,
+  postDeletePost
 } from './actions'
 import PropTypes from 'prop-types'
 import { push } from 'react-router-redux'
@@ -63,8 +64,10 @@ class PostList extends Component {
             <tr>
               <th>Score</th>
               <th>Controls</th>
+              <th>Comments</th>
               <th>Title</th>
               <th>TimeStamp</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -77,9 +80,13 @@ class PostList extends Component {
                     <button onClick={() => { this.props.downvotePost(post.id) }}>Downvote</button>
                   </td>
                   <td>
+                    {post.commentCount}
+                  </td>
+                  <td>
                     <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
                   </td>
                   <td>{(new Date(post.timestamp)).toString()}</td>
+                  <td><a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.deletePost(post.id); this.props.push(`/`) }}>Delete</a></td>
                 </tr>
               )
             }
@@ -110,7 +117,8 @@ const mapDispatchToProps = (dispatch) => ({
   sortTimestampDesc: () => dispatch(sortPostsTimestampDesc()),
   push: (url) => dispatch(push(url)),
   upvotePost: (id) => dispatch(postVotePost(id, 'upVote')),
-  downvotePost: (id) => dispatch(postVotePost(id, 'downVote'))
+  downvotePost: (id) => dispatch(postVotePost(id, 'downVote')),
+  deletePost: (id) => dispatch(postDeletePost(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)
