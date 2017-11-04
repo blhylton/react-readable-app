@@ -66,6 +66,7 @@ class PostList extends Component {
               <th>Controls</th>
               <th>Comments</th>
               <th>Title</th>
+              <th>Author</th>
               <th>TimeStamp</th>
               <th>Actions</th>
             </tr>
@@ -84,6 +85,9 @@ class PostList extends Component {
                   </td>
                   <td>
                     <a href="" onClick={() => { this.props.push(`/post/${post.id}`) }}>{post.title}</a>
+                  </td>
+                  <td>
+                    {post.author}
                   </td>
                   <td>{(new Date(post.timestamp)).toString()}</td>
                   <td><a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.deletePost(post.id); this.props.push(`/`) }}>Delete</a></td>
