@@ -17,7 +17,12 @@ class CommentList extends Component {
   render() {
     const { comments, voteComment, deleteComment } = this.props;
     if (comments.length === 0) {
-      return <p>There are no comments</p>
+      return (
+        <div>
+          <p>There are no comments</p>
+          <CommentCreate id={this.props.id} />
+        </div>
+      )
     }
 
     comments.sort(sortBy('-voteScore'))
