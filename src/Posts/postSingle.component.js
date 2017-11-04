@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   fetchSinglePost,
-  postDeletePost
+  postDeletePost,
+  postVotePost
 } from './actions'
 import { push } from 'react-router-redux'
 import PropTypes from 'prop-types'
@@ -35,7 +36,8 @@ class SinglePost extends Component {
             <p>{post.body}</p>
             <p>Author: {post.author}</p>
             <p>Comment Count: {post.commentCount}</p>
-            <a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a>
+            <p><a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a></p>
+            <p><a href="" onClick={() => { this.props.upvotePost(post.id)}}>Upvote</a> | <a href="" onClick={() => { this.props.downvotePost(post.id)}}>Downvote</a></p>
             <CommentList id={id} />
           </div>
         )}
@@ -52,7 +54,9 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = dispatch => ({
   getPost: (id) => dispatch(fetchSinglePost(id)),
   push: (url) => dispatch(push(url)),
-  delete: (id) => dispatch(postDeletePost(id))
+  delete: (id) => dispatch(postDeletePost(id)),
+  upvotePost: (id) => dispatch(postVotePost(id, 'upVote')),
+  downvotePost: (id) => dispatch(postVotePost(id, 'downVote'))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePost)
