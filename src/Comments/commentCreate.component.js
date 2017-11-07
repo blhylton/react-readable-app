@@ -9,6 +9,7 @@ import CommentForm from './commentForm.component'
 class CommentCreate extends Component {
   submit = (value) => {
     this.props.createComment(value.body, value.author, value.parent)
+    this.props.onSubmit()
   }
 
   render() {

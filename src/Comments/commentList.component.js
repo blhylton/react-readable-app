@@ -57,7 +57,7 @@ class CommentList extends Component {
             ))}
           </tbody>
         </table>
-        <CommentCreate id={this.props.id} />
+        <CommentCreate id={this.props.id} onSubmit={this.props.onSubmit} />
       </div>
     )
   }

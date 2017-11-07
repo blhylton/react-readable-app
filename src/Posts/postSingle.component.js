@@ -18,6 +18,10 @@ class SinglePost extends Component {
     this.props.getPost(this.props.id)
   }
 
+  sumbitComment = () => {
+    this.props.getPost(this.props.id)
+  }
+
   render() {
     const { post, id } = this.props
 
@@ -38,7 +42,7 @@ class SinglePost extends Component {
             <p>Comment Count: {post.commentCount}</p>
             <p><a href="" onClick={() => { this.props.push(`/edit-post/${post.id}`) }}>Edit</a> | <a href="" onClick={() => { this.props.delete(post.id); this.props.push(`/`) }}>Delete</a></p>
             <p><a href="" onClick={() => { this.props.upvotePost(post.id)}}>Upvote</a> | <a href="" onClick={() => { this.props.downvotePost(post.id)}}>Downvote</a></p>
-            <CommentList id={id} />
+            <CommentList id={id} onSubmit={ this.sumbitComment } />
           </div>
         )}
       </div>
